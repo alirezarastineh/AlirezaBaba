@@ -7,12 +7,16 @@
   -webkit-text-size-adjust: 100%;
 }
 
-
-.product-image {
-  max-width: 400px;
-  width: 100%;
-}
-
 .rating span {
   color: #ffc000
+}
+
+img.large {
+  max-width: 100%;
+}
+
+.product-image {
+  object-fit: cover;
+  height: 300px;
+  /* Adjust the height as per your requirement */
 }
