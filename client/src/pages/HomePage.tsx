@@ -8,6 +8,7 @@ import { ApiError } from "../types/ApiError";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import ProductItem from "../components/ProductItem";
+import { Helmet } from "react-helmet-async";
 
 type State = {
   products: Product[];
@@ -66,6 +67,9 @@ export default function HomePage() {
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <Row>
+      <Helmet>
+        <title>AlirezaBaba</title>
+      </Helmet>
       {sampleProducts.map((product) => (
         <Col key={product.slug} sm={6} md={4} lg={3}>
           <ProductItem product={product} />

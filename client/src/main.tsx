@@ -12,6 +12,7 @@ import "./index.css";
 import HomePage from "./pages/HomePage.tsx";
 import ProductPage from "./pages/ProductPage.tsx";
 import axios from "axios";
+import { HelmetProvider } from "react-helmet-async";
 
 axios.defaults.baseURL =
   process.env.NODE_ENV === "development" ? "http://localhost:4000" : "/";
@@ -21,14 +22,14 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index={true} element={<HomePage />} />
       <Route path="product/:slug" element={<ProductPage />} />
-      {/* <Route path="dashboard" element={<Dashboard />} /> */}
-      {/* ... etc. */}
     </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <HelmetProvider>
+      <RouterProvider router={router} />
+    </HelmetProvider>
   </React.StrictMode>
 );
