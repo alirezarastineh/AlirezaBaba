@@ -18,7 +18,7 @@ export default function HomePage() {
       <Helmet>
         <title>AlirezaBaba</title>
       </Helmet>
-      {products!.map((product) => (
+      {products?.map((product) => (
         <Col key={product.slug} sm={6} md={4} lg={3}>
           <ProductItem product={product} />
         </Col>

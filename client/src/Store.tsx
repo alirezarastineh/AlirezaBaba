@@ -6,29 +6,40 @@ type AppState = {
   cart: Cart;
 };
 
+const storedMode = localStorage.getItem("mode");
+const prefersDarkMode =
+  window.matchMedia &&
+  window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+let parsedCartItems;
+const cartItems = localStorage.getItem("cartItems");
+if (cartItems) {
+  parsedCartItems = JSON.parse(cartItems);
+} else {
+  parsedCartItems = [];
+}
+
+let parsedShippingAddress;
+const shippingAddress = localStorage.getItem("shippingAddress");
+if (shippingAddress) {
+  parsedShippingAddress = JSON.parse(shippingAddress);
+} else {
+  parsedShippingAddress = {};
+}
+
 const initialState: AppState = {
-  mode: localStorage.getItem("mode")
-    ? localStorage.getItem("mode")!
-    : window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light",
+  mode: storedMode || (prefersDarkMode ? "dark" : "light"),
   cart: {
-    cartItems: localStorage.getItem("cartItems")
-      ? JSON.parse(localStorage.getItem("cartItems")!)
-      : [],
-    shippingAddress: localStorage.getItem("shippingAddress")
-      ? JSON.parse(localStorage.getItem("shippingAddress")!)
-      : {},
-    paymentMethod: localStorage.getItem("paymentMethod")
-      ? localStorage.getItem("paymentMethod")!
-      : "PayPal",
+    cartItems: parsedCartItems,
+    shippingAddress: parsedShippingAddress,
+    paymentMethod: localStorage.getItem("paymentMethod") || "PayPal",
     itemsPrice: 0,
     shippingPrice: 0,
     taxPrice: 0,
     totalPrice: 0,
   },
 };
+
 type Action =
   | { type: "SWITCH_MODE" }
   | { type: "CART_ADD_ITEM"; payload: CartItem };
@@ -62,7 +73,11 @@ const Store = React.createContext({
   state: initialState,
   dispatch: defaultDispatch,
 });
-function StoreProvider(props: React.PropsWithChildren<Record<string, never>>) {
+
+interface StoreProviderProps {
+  children: React.ReactNode;
+}
+function StoreProvider(props: StoreProviderProps) {
   const [state, dispatch] = React.useReducer<React.Reducer<AppState, Action>>(
     reducer,
     initialState
