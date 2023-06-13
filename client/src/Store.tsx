@@ -62,7 +62,7 @@ const Store = React.createContext({
   state: initialState,
   dispatch: defaultDispatch,
 });
-function StoreProvider(props: React.PropsWithChildren<{}>) {
+function StoreProvider(props: React.PropsWithChildren<Record<string, never>>) {
   const [state, dispatch] = React.useReducer<React.Reducer<AppState, Action>>(
     reducer,
     initialState

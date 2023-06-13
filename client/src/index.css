@@ -17,6 +17,5 @@ img.large {
 
 .product-image {
   object-fit: cover;
-  height: 300px;
-  /* Adjust the height as per your requirement */
+  height: 400px;
 }
