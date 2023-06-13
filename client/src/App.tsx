@@ -1,15 +1,32 @@
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { useContext, useEffect } from "react";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
+import { Store } from "./Store";
 
 function App() {
+  const {
+    state: { mode },
+    dispatch,
+  } = useContext(Store);
+
+  useEffect(() => {
+    document.body.setAttribute("data-bs-theme", mode);
+  }, [mode]);
+
+  const switchModeHandler = () => {
+    dispatch({ type: "SWITCH_MODE" });
+  };
   return (
     <div className="d-flex flex-column vh-100">
       <header>
-        <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar expand="lg">
           <Container>
             <Navbar.Brand>AlirezaBaba</Navbar.Brand>
           </Container>
           <Nav>
+            <Button variant={mode} onClick={switchModeHandler}>
+              <i className={mode === "light" ? "fa fa-sun" : "fa fa-moon"}></i>
+            </Button>
             <a href="/cart" className="nav-link">
               Cart
             </a>
