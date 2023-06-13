@@ -3,7 +3,7 @@ import asyncHandler from "express-async-handler";
 import { ProductModel } from "../models/productModel";
 
 export const productRouter = express.Router();
-// /api/prodcuts
+// /api/products
 productRouter.get(
   "/",
   asyncHandler(async (req, res) => {

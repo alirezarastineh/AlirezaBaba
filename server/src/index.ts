@@ -1,9 +1,10 @@
-import { seedRouter } from "./routers/seedRouters";
+import { seedRouter } from "./routers/seedRouter";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import { productRouter } from "./routers/productRouter";
+import { userRouter } from "./routers/userRouter";
 
 dotenv.config();
 
@@ -28,7 +29,11 @@ app.use(
   })
 );
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/api/products", productRouter);
+app.use("/api/users", userRouter);
 app.use("/api/seed", seedRouter);
 
 const PORT = 4000;
