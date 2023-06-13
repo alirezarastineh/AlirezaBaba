@@ -78,7 +78,7 @@ export default function CartPage() {
                         <i className="fas fa-plus-circle"></i>
                       </Button>
                     </Col>
-                    <Col md={3}>${item.price}</Col>
+                    <Col md={3}>€{item.price}</Col>
                     <Col md={2}>
                       <Button variant={mode}>
                         <i className="fas fa-trash"></i>
@@ -97,7 +97,7 @@ export default function CartPage() {
                 <ListGroup.Item>
                   <h3>
                     Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{" "}
-                    items) : $
+                    items) : €
                     {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
                   </h3>
                 </ListGroup.Item>
