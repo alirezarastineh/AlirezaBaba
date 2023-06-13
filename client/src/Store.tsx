@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Cart, CartItem } from "./types/Cart";
 
 type AppState = {
@@ -7,12 +8,15 @@ type AppState = {
 };
 
 const storedMode = localStorage.getItem("mode");
+
 const prefersDarkMode =
   window.matchMedia &&
   window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 let parsedCartItems;
+
 const cartItems = localStorage.getItem("cartItems");
+
 if (cartItems) {
   parsedCartItems = JSON.parse(cartItems);
 } else {
@@ -20,7 +24,9 @@ if (cartItems) {
 }
 
 let parsedShippingAddress;
+
 const shippingAddress = localStorage.getItem("shippingAddress");
+
 if (shippingAddress) {
   parsedShippingAddress = JSON.parse(shippingAddress);
 } else {
@@ -29,6 +35,7 @@ if (shippingAddress) {
 
 const initialState: AppState = {
   mode: storedMode || (prefersDarkMode ? "dark" : "light"),
+
   cart: {
     cartItems: parsedCartItems,
     shippingAddress: parsedShippingAddress,
@@ -42,17 +49,21 @@ const initialState: AppState = {
 
 type Action =
   | { type: "SWITCH_MODE" }
-  | { type: "CART_ADD_ITEM"; payload: CartItem };
+  | { type: "CART_ADD_ITEM"; payload: CartItem }
+  | { type: "CART_REMOVE_ITEM"; payload: CartItem };
 
 function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case "SWITCH_MODE":
       return { ...state, mode: state.mode === "dark" ? "light" : "dark" };
+
     case "CART_ADD_ITEM": {
       const newItem = action.payload;
+
       const existItem = state.cart.cartItems.find(
         (item: CartItem) => item._id === newItem._id
       );
+
       const cartItems = existItem
         ? state.cart.cartItems.map((item: CartItem) =>
             item._id === existItem._id ? newItem : item
@@ -64,11 +75,23 @@ function reducer(state: AppState, action: Action): AppState {
       return { ...state, cart: { ...state.cart, cartItems } };
     }
 
+    case "CART_REMOVE_ITEM": {
+      const cartItems = state.cart.cartItems.filter(
+        (item: CartItem) => item._id !== action.payload._id
+      );
+
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
+
     default:
       return state;
   }
 }
+
 const defaultDispatch: React.Dispatch<Action> = () => initialState;
+
 const Store = React.createContext({
   state: initialState,
   dispatch: defaultDispatch,
@@ -77,11 +100,14 @@ const Store = React.createContext({
 interface StoreProviderProps {
   children: React.ReactNode;
 }
+
 function StoreProvider(props: StoreProviderProps) {
   const [state, dispatch] = React.useReducer<React.Reducer<AppState, Action>>(
     reducer,
     initialState
   );
+
   return <Store.Provider value={{ state, dispatch }} {...props} />;
 }
+
 export { Store, StoreProvider };
