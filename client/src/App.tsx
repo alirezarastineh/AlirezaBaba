@@ -12,7 +12,6 @@ import { Store } from "./Store";
 import { LinkContainer } from "react-router-bootstrap";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./index.css";
 
 function App() {
   const {
@@ -62,7 +61,7 @@ function App() {
             {userInfo ? (
               <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
                 <Link
-                  className="dropdown-item drop-size"
+                  className="dropdown-item"
                   to="#signout"
                   onClick={signoutHandler}
                 >
