@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetProductDetailsBySlugQuery } from "../hooks/productHooks";
@@ -33,12 +33,16 @@ function ProductPage() {
       return;
     }
 
-    dispatch({
-      type: "CART_ADD_ITEM",
-      payload: { ...convertProductToCartItem(product!), quantity },
-    });
-    toast.success("Product added to the cart");
-    navigate("/cart");
+    if (product) {
+      dispatch({
+        type: "CART_ADD_ITEM",
+        payload: { ...convertProductToCartItem(product), quantity },
+      });
+      toast.success("Product added to the cart");
+      navigate("/cart");
+    } else {
+      toast.error("Unable to add product to cart. Please try again later.");
+    }
   };
 
   return isLoading ? (
