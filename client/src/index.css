@@ -24,3 +24,11 @@ img.thumbnail {
   object-fit: cover;
   height: 400px;
 }
+
+.small-container {
+  max-width: 600px;
+}
+
+.drop-size {
+  max-width: 10px
+}
