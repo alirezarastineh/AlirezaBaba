@@ -3,6 +3,7 @@ import asyncHandler from "express-async-handler";
 import { OrderModel } from "../models/orderModel";
 import { Product } from "../models/productModel";
 import { isAuth } from "../utils";
+
 export const orderRouter = express.Router();
 
 orderRouter.get(
@@ -40,6 +41,30 @@ orderRouter.post(
         user: req.user._id,
       });
       res.status(201).json({ message: "Order Created", order: createdOrder });
+    }
+  })
+);
+
+orderRouter.put(
+  "/:id/pay",
+  isAuth,
+  asyncHandler(async (req: Request, res: Response) => {
+    const order = await OrderModel.findById(req.params.id);
+
+    if (order) {
+      order.isPaid = true;
+      order.paidAt = new Date(Date.now());
+      order.paymentResult = {
+        paymentId: req.body.id,
+        status: req.body.status,
+        update_time: req.body.update_time,
+        email_address: req.body.email_address,
+      };
+      const updatedOrder = await order.save();
+
+      res.send({ order: updatedOrder, message: "Order Paid Successfully" });
+    } else {
+      res.status(404).json({ message: "Order Not Found" });
     }
   })
 );
