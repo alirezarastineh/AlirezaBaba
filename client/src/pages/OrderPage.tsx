@@ -159,7 +159,7 @@ export default function OrderPage() {
                           src={item.image}
                           alt={item.name}
                           className="img-fluid rounded thumbnail"
-                        ></img>{" "}
+                        />
                         <Link to={`/product/${item.slug}`}>{item.name}</Link>
                       </Col>
                       <Col md={3}>

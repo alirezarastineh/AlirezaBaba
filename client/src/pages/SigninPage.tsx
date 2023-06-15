@@ -74,7 +74,7 @@ export default function SigninPage() {
           {isLoading && <LoadingBox />}
         </div>
         <div className="mb-3">
-          New customer?{" "}
+          New customer?
           <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
         </div>
       </Form>
