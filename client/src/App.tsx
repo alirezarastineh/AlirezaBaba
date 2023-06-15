@@ -41,7 +41,7 @@ function App() {
         >
           <div className="d-flex justify-content-between align-items-center">
             <LinkContainer to="/" className="header-link">
-              <Navbar.Brand>Alirezon</Navbar.Brand>
+              <Navbar.Brand>AlirezaBaba</Navbar.Brand>
             </LinkContainer>
             <Navbar.Collapse>
               <Nav className="w-100 justify-content-end">
