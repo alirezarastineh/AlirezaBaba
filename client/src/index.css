@@ -44,6 +44,12 @@ img.thumbnail {
   right: 0;
 }
 
+.btn-primary,
+.btn-outline-primary {
+  background-color: #f0c040;
+  color: #000000;
+}
+
 /* Header */
 
 .navbar-brand {

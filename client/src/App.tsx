@@ -1,25 +1,30 @@
 import { useContext, useEffect } from "react";
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  Form,
+  FormControl,
+  InputGroup,
+  Nav,
+  Navbar,
+  NavDropdown,
+} from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
-import { Store } from "./Store";
 import { LinkContainer } from "react-router-bootstrap";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { Store } from "./Store";
 function App() {
   const {
     state: { mode, cart, userInfo },
     dispatch,
   } = useContext(Store);
-
   useEffect(() => {
     document.body.setAttribute("data-bs-theme", mode);
   }, [mode]);
-
   const switchModeHandler = () => {
     dispatch({ type: "SWITCH_MODE" });
   };
-
   const signoutHandler = () => {
     dispatch({ type: "USER_SIGNOUT" });
     localStorage.removeItem("userInfo");
@@ -28,7 +33,6 @@ function App() {
     localStorage.removeItem("paymentMethod");
     window.location.href = "/signin";
   };
-
   return (
     <div className="d-flex flex-column vh-100">
       <ToastContainer position="bottom-center" limit={1} />
@@ -43,6 +47,26 @@ function App() {
             <LinkContainer to="/" className="header-link">
               <Navbar.Brand>AlirezaBaba</Navbar.Brand>
             </LinkContainer>
+            <Form className="flex-grow-1 d-flex me-auto">
+              <InputGroup>
+                <FormControl
+                  type="text"
+                  name="q"
+                  id="q"
+                  placeholder="Search AlirezaBaba"
+                  aria-label="Search AlirezaBaba"
+                  aria-describedby="button-search"
+                />
+                <Button
+                  variant="outline-primary"
+                  type="submit"
+                  id="button-search"
+                >
+                  <i className="fas fa-search" />
+                </Button>
+              </InputGroup>
+            </Form>
+
             <Navbar.Collapse>
               <Nav className="w-100 justify-content-end">
                 <Link
@@ -52,10 +76,9 @@ function App() {
                 >
                   <i
                     className={mode === "light" ? "fa fa-sun" : "fa fa-moon"}
-                  ></i>{" "}
+                  />
                   {mode === "light" ? "Light" : "Dark"}
                 </Link>
-
                 {userInfo ? (
                   <NavDropdown
                     className="header-link"
@@ -73,8 +96,7 @@ function App() {
                       to="#signout"
                       onClick={signoutHandler}
                     >
-                      {" "}
-                      Sign Out{" "}
+                      Sign Out
                     </Link>
                   </NavDropdown>
                 ) : (
@@ -109,7 +131,7 @@ function App() {
           <div className="sub-header">
             <div className="d-flex">
               <Link to="#" className="nav-link header-link p-1">
-                <i className="fas fa-bars"></i> All
+                <i className="fas fa-bars" /> All
               </Link>
               {["Todays Deal", "Gifts", "On Sale"].map((x) => (
                 <Link
@@ -130,10 +152,9 @@ function App() {
         </Container>
       </main>
       <footer>
-        <div className="text-center">All right reserved</div>
+        <div className="text-center">All rights reserved</div>
       </footer>
     </div>
   );
 }
-
 export default App;
