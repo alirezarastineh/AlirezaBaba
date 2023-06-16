@@ -49,10 +49,10 @@ export default function PaymentMethodPage() {
           <div className="mb-3">
             <Form.Check
               type="radio"
-              id="Stripe"
-              label="Stripe"
-              value="Stripe"
-              checked={paymentMethodName === "Stripe"}
+              id="Google Pay/Apple Pay"
+              label="Google Pay/Apple Pay"
+              value="Google Pay/Apple Pay"
+              checked={paymentMethodName === "Google Pay/Apple Pay"}
               onChange={(e) => setPaymentMethodName(e.target.value)}
             />
           </div>
