@@ -23,12 +23,6 @@ export default function SignupPage() {
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
 
-  useEffect(() => {
-    if (userInfo) {
-      navigate(redirect);
-    }
-  }, [navigate, redirect, userInfo]);
-
   const { mutateAsync: signup, isLoading } = useSignupMutation();
 
   const submitHandler = async (e: React.SyntheticEvent) => {
@@ -50,6 +44,12 @@ export default function SignupPage() {
       toast.error(getError(err as ApiError));
     }
   };
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
 
   return (
     <Container className="small-container">

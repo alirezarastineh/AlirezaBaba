@@ -131,7 +131,7 @@ export default function PlaceOrderPage() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Tax</Col>
-                    <Col>${cart.taxPrice.toFixed(2)}</Col>
+                    <Col>€{cart.taxPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -140,7 +140,7 @@ export default function PlaceOrderPage() {
                       <strong> Order Total</strong>
                     </Col>
                     <Col>
-                      <strong>${cart.totalPrice.toFixed(2)}</strong>
+                      <strong>€{cart.totalPrice.toFixed(2)}</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
