@@ -14,6 +14,12 @@ export const sampleProducts: Product[] = [
     description: "High Quality Shirt",
     rating: 4.5,
     numReviews: 10,
+    reviews: [
+      { name: "John", comment: "good", rating: 4, createdAt: new Date() },
+    ],
+    images: ["../images/p11.jpg"],
+    isFeatured: true,
+    banner: "../images/b1.jpg",
   },
   {
     name: "Adidas Fit Shirt",
@@ -26,6 +32,10 @@ export const sampleProducts: Product[] = [
     description: "High Quality Product",
     rating: 4.0,
     numReviews: 10,
+    reviews: [],
+    images: [],
+    isFeatured: true,
+    banner: "../images/b2.jpg",
   },
   {
     name: "Lacoste Free Pants",
@@ -38,6 +48,9 @@ export const sampleProducts: Product[] = [
     description: "High Quality Product",
     rating: 4.8,
     numReviews: 17,
+    reviews: [],
+    images: [],
+    isFeatured: false,
   },
   {
     name: "Nike Slim Pants",
@@ -50,6 +63,9 @@ export const sampleProducts: Product[] = [
     description: "High Quality Product",
     rating: 4.5,
     numReviews: 14,
+    reviews: [],
+    images: [],
+    isFeatured: false,
   },
 ];
 
