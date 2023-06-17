@@ -58,7 +58,7 @@ export default function CartPage() {
                         src={item.image}
                         alt={item.name}
                         className="img-fluid rounded thumbnail"
-                      ></img>
+                      />
                       <Link to={`/product/${item.slug}`}>{item.name}</Link>
                     </Col>
                     <Col md={3}>
@@ -69,7 +69,7 @@ export default function CartPage() {
                         variant={mode}
                         disabled={item.quantity === 1}
                       >
-                        <i className="fas fa-minus-circle"></i>
+                        <i className="fas fa-minus-circle" />
                       </Button>
                       <span>{item.quantity}</span>
                       <Button
@@ -79,7 +79,7 @@ export default function CartPage() {
                         }
                         disabled={item.quantity === item.countInStock}
                       >
-                        <i className="fas fa-plus-circle"></i>
+                        <i className="fas fa-plus-circle" />
                       </Button>
                     </Col>
                     <Col md={3}>€{item.price}</Col>
@@ -88,7 +88,7 @@ export default function CartPage() {
                         onClick={() => removeItemHandler(item)}
                         variant={mode}
                       >
-                        <i className="fas fa-trash"></i>
+                        <i className="fas fa-trash" />
                       </Button>
                     </Col>
                   </Row>
