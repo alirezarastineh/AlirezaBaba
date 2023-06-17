@@ -14,25 +14,13 @@ const prefersDarkMode =
   window.matchMedia &&
   window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-let parsedCartItems;
-
 const cartItems = localStorage.getItem("cartItems");
-
-if (cartItems) {
-  parsedCartItems = JSON.parse(cartItems);
-} else {
-  parsedCartItems = [];
-}
-
-let parsedShippingAddress;
+const parsedCartItems = cartItems ? JSON.parse(cartItems) : [];
 
 const shippingAddress = localStorage.getItem("shippingAddress");
-
-if (shippingAddress) {
-  parsedShippingAddress = JSON.parse(shippingAddress);
-} else {
-  parsedShippingAddress = {};
-}
+const parsedShippingAddress = shippingAddress
+  ? JSON.parse(shippingAddress)
+  : {};
 
 const initialState: AppState = {
   userInfo: localStorage.getItem("userInfo")
