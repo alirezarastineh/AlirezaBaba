@@ -50,8 +50,6 @@ img.thumbnail {
   color: #000000;
 }
 
-/* Header */
-
 .navbar-brand {
   font-weight: bold;
   font-size: 1.8rem;
@@ -93,22 +91,15 @@ a.header-link:hover,
   margin-top: -3px;
 }
 
-/* Sidebar */
 .side-navbar-backdrop {
   position: fixed;
-  /* Stay in place */
   z-index: 1;
-  /* Sit on top */
   left: 0;
   top: 0;
   width: 100%;
-  /* Full width */
   height: 100%;
-  /* Full height */
   overflow: auto;
-  /* Enable scroll if needed */
   background-color: rgba(0, 0, 0, 0.6);
-  /* Black w/ opacity */
 }
 
 .side-navbar {
