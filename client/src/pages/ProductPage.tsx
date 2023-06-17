@@ -40,22 +40,20 @@ function ProductPage() {
       });
       toast.success("Product added to the cart");
       navigate("/cart");
-    } else {
-      toast.error("Unable to add product to cart. Please try again later.");
+      return;
     }
+    toast.error("Unable to add product to cart. Please try again later.");
   };
 
   return isLoading ? (
     <LoadingBox />
   ) : error ? (
     <MessageBox variant="danger">{getError(error as ApiError)}</MessageBox>
-  ) : !product ? (
-    <MessageBox variant="danger">Product Not Found</MessageBox>
-  ) : (
+  ) : product ? (
     <div>
       <Row>
         <Col md={6}>
-          <img className="large" src={product.image} alt={product.name}></img>
+          <img className="large" src={product.image} alt={product.name} />
         </Col>
         <Col md={3}>
           <ListGroup variant="flush">
@@ -66,10 +64,7 @@ function ProductPage() {
               <h1>{product.name}</h1>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Rating
-                rating={product.rating}
-                numReviews={product.numReviews}
-              ></Rating>
+              <Rating rating={product.rating} numReviews={product.numReviews} />
             </ListGroup.Item>
             <ListGroup.Item>Price : €{product.price}</ListGroup.Item>
             <ListGroup.Item>
@@ -115,6 +110,8 @@ function ProductPage() {
         </Col>
       </Row>
     </div>
+  ) : (
+    <MessageBox variant="danger">Product Not Found</MessageBox>
   );
 }
 export default ProductPage;
