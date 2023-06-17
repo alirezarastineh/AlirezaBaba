@@ -54,7 +54,7 @@ export default function PlaceOrderPage() {
 
   return (
     <div>
-      <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
+      <CheckoutSteps step1 step2 step3 step4 />
       <Helmet>
         <title>Preview Order</title>
       </Helmet>
