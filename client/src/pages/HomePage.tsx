@@ -44,7 +44,7 @@ export default function HomePage() {
             <Row>
               {data!.latestProducts.map((product: Product) => (
                 <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
-                  <ProductItem product={product}></ProductItem>
+                  <ProductItem product={product} />
                 </Col>
               ))}
             </Row>
