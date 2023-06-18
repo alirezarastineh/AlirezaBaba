@@ -30,17 +30,15 @@ userRouter.post(
   "/signin",
   asyncHandler(async (req: Request, res: Response) => {
     const user = await UserModel.findOne({ email: req.body.email });
-    if (user) {
-      if (bcrypt.compareSync(req.body.password, user.password)) {
-        res.json({
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-          isAdmin: user.isAdmin,
-          token: generateToken(user),
-        });
-        return;
-      }
+    if (user && bcrypt.compareSync(req.body.password, user.password)) {
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        token: generateToken(user),
+      });
+      return;
     }
     res.status(401).json({ message: "Invalid email or password" });
   })
@@ -102,9 +100,9 @@ userRouter.put(
       user.isAdmin = Boolean(req.body.isAdmin);
       const updatedUser = await user.save();
       res.json({ message: "User Updated", user: updatedUser });
-    } else {
-      res.status(404).json({ message: "User Not Found" });
+      return;
     }
+    res.status(404).json({ message: "User Not Found" });
   })
 );
 
@@ -121,8 +119,8 @@ userRouter.delete(
       }
       const deleteUser = await user.deleteOne();
       res.json({ message: "User Deleted", user: deleteUser });
-    } else {
-      res.status(404).json({ message: "User Not Found" });
+      return;
     }
+    res.status(404).json({ message: "User Not Found" });
   })
 );
