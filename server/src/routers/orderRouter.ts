@@ -127,9 +127,9 @@ orderRouter.put(
       const updatedOrder = await order.save();
 
       res.json({ order: updatedOrder, message: "Order Paid Successfully" });
-    } else {
-      res.status(404).json({ message: "Order Not Found" });
+      return;
     }
+    res.status(404).json({ message: "Order Not Found" });
   })
 );
 
@@ -157,12 +157,11 @@ orderRouter.put(
     if (order) {
       order.isDelivered = true;
       order.deliveredAt = new Date(Date.now());
-      // order.deliveredAt = Date.now();
 
       const updatedOrder = await order.save();
       res.json({ message: "Order Delivered", order: updatedOrder });
-    } else {
-      res.status(404).json({ message: "Order Not Found" });
+      return;
     }
+    res.status(404).json({ message: "Order Not Found" });
   })
 );
