@@ -7,6 +7,7 @@
     "Lacoste",
     "nokey",
     "orderhistory",
+    "paypalbutton",
     "placeorder",
     "signin",
     "SIGNOUT",
@@ -14,6 +15,7 @@
     "somethingsecret",
     "streamifier",
     "tanstack",
-    "toastify"
+    "toastify",
+    "toprated"
   ]
 }
