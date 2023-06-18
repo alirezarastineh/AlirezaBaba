@@ -48,7 +48,7 @@ export default function OrderPage() {
   const { data: paypalConfig } = useGetPaypalClientIdQuery();
 
   useEffect(() => {
-    if (paypalConfig && paypalConfig.clientId) {
+    if (paypalConfig?.clientId) {
       const loadPaypalScript = async () => {
         paypalDispatch({
           type: "resetOptions",
@@ -69,32 +69,27 @@ export default function OrderPage() {
   const paypalbuttonTransactionProps: PayPalButtonsComponentProps = {
     style: { layout: "vertical" },
 
-    createOrder(data, actions) {
-      return actions.order
-        .create({
-          purchase_units: [
-            {
-              amount: {
-                value: order!.totalPrice.toString(),
-              },
+    async createOrder(data, actions) {
+      return await actions.order.create({
+        purchase_units: [
+          {
+            amount: {
+              value: order!.totalPrice.toString(),
             },
-          ],
-        })
-        .then((orderID: string) => {
-          return orderID;
-        });
+          },
+        ],
+      });
     },
 
-    onApprove(data, actions) {
-      return actions.order!.capture().then(async (details) => {
-        try {
-          await payOrder({ orderId: orderId!, ...details });
-          refetch();
-          toast.success("Order is paid successfully");
-        } catch (err) {
-          toast.error(getError(err as ApiError));
-        }
-      });
+    async onApprove(data, actions) {
+      const details = await actions.order!.capture();
+      try {
+        await payOrder({ orderId: orderId!, ...details });
+        refetch();
+        toast.success("Order is paid successfully");
+      } catch (err) {
+        toast.error(getError(err as ApiError));
+      }
     },
 
     onError: (err) => {
