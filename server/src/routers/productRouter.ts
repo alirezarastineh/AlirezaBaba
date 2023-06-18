@@ -193,9 +193,9 @@ productRouter.put(
       product.description = req.body.description;
       const updatedProduct = await product.save();
       res.json({ message: "Product Updated", product: updatedProduct });
-    } else {
-      res.status(404).json({ message: "Product Not Found" });
+      return;
     }
+    res.status(404).json({ message: "Product Not Found" });
   })
 );
 
@@ -236,14 +236,13 @@ productRouter.post(
       product.rating =
         product.reviews.reduce((a, c) => c.rating + a, 0) /
         product.reviews.length;
-      console.log(product.reviews);
       const updatedProduct = await product.save();
       res.status(201).json({
         message: "Review Created",
         review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
       });
-    } else {
-      res.status(404).json({ message: "Product Not Found" });
+      return;
     }
+    res.status(404).json({ message: "Product Not Found" });
   })
 );
