@@ -21,15 +21,17 @@ import SearchBox from "./components/SearchBox";
 
 function App() {
   const {
-    state: { mode, cart, userInfo },
+    state: { mode, cart, userInfo, fullBox },
     dispatch,
   } = useContext(Store);
+
   useEffect(() => {
     document.body.setAttribute("data-bs-theme", mode);
   }, [mode]);
   const switchModeHandler = () => {
     dispatch({ type: "SWITCH_MODE" });
   };
+
   const signoutHandler = () => {
     dispatch({ type: "USER_SIGNOUT" });
     localStorage.removeItem("userInfo");
@@ -44,7 +46,17 @@ function App() {
   const { data: categories, isLoading, error } = useGetCategoriesQuery();
 
   return (
-    <div className="d-flex flex-column vh-100">
+    <div
+      className={
+        sidebarIsOpen
+          ? fullBox
+            ? "site-container active-cont d-flex flex-column full-box"
+            : "site-container active-cont d-flex flex-column"
+          : fullBox
+          ? "site-container d-flex flex-column full-box"
+          : "site-container d-flex flex-column"
+      }
+    >
       <ToastContainer position="bottom-center" limit={1} />
       <header>
         <Navbar
@@ -92,9 +104,25 @@ function App() {
                     </Link>
                   </NavDropdown>
                 ) : (
-                  <NavDropdown className="header-link" title={`Hello, sign in`}>
+                  <NavDropdown className="header-link" title={`Sign In`}>
                     <LinkContainer to="/signin">
                       <NavDropdown.Item>Sign In</NavDropdown.Item>
+                    </LinkContainer>
+                  </NavDropdown>
+                )}
+                {userInfo?.isAdmin && (
+                  <NavDropdown className="header-link" title="Admin">
+                    <LinkContainer to="/admin/dashboard">
+                      <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/admin/products">
+                      <NavDropdown.Item>Products</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/admin/orders">
+                      <NavDropdown.Item>Orders</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/admin/users">
+                      <NavDropdown.Item>Users</NavDropdown.Item>
                     </LinkContainer>
                   </NavDropdown>
                 )}
@@ -140,6 +168,7 @@ function App() {
               ))}
             </div>
           </div>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
         </Navbar>
       </header>
 
@@ -163,9 +192,7 @@ function App() {
               to={userInfo ? `/profile` : `/signin`}
               onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
             >
-              <span>
-                {userInfo ? `Hello, ${userInfo.name}` : `Hello, sign in`}
-              </span>
+              <span>{userInfo ? `Hello, ${userInfo.name}` : `Sign In`}</span>
             </LinkContainer>
           </ListGroup.Item>
           <ListGroup.Item>
@@ -201,7 +228,7 @@ function App() {
       </div>
 
       <main>
-        <Container className="mt-3">
+        <Container fluid>
           <Outlet />
         </Container>
       </main>
