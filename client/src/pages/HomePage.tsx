@@ -1,7 +1,7 @@
 import { Row, Col } from "react-bootstrap";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import ProductItem from "../components/ProductItem";
+import ProductItem from "../components/Products/ProductItem";
 import { Helmet } from "react-helmet-async";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const { data, isLoading, error } = useGetProductsQuery();
-
+  console.log("data", data);
   return (
     <div>
       <Helmet>
@@ -33,13 +33,16 @@ export default function HomePage() {
                 className="flex"
               >
                 <div>
-                  <img src={product.banner} alt={product.name} />
+                  <img
+                    src={`http://localhost:4000${product.banner}`}
+                    alt={product.name}
+                  />
                 </div>
               </Link>
             ))}
           </Carousel>
 
-          <h1>Latest Products 1</h1>
+          <h1>Latest Cars</h1>
           <div className="products">
             <Row>
               {data!.latestProducts.map((product: Product) => (
