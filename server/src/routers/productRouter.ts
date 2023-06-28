@@ -5,15 +5,15 @@ import { isAdmin, isAuth } from "../utils";
 
 export const productRouter = express.Router();
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 10;
 
 // /api/products
 productRouter.get(
   "/",
   asyncHandler(async (req, res) => {
-    const latestProducts = await ProductModel.find({}, "-reviews")
-      .sort({ _id: -1 })
-      .limit(6);
+    const latestProducts = await ProductModel.find({}, "-reviews").sort({
+      _id: -1,
+    });
     const featuredProducts = await ProductModel.find(
       {
         isFeatured: true,
