@@ -3,6 +3,20 @@ import apiClient from "../apiClient";
 import { CartItem, ShippingAddress } from "../types/Cart";
 import { Order } from "../types/Order";
 
+export const useGetOrderSummaryQuery = () =>
+  useQuery({
+    queryKey: ["orders-summary"],
+    queryFn: async () =>
+      (
+        await apiClient.get<{
+          users: [{ numUsers: number }];
+          orders: [{ numOrders: number; totalSales: number }];
+          dailyOrders: [];
+          productCategories: [];
+        }>(`api/orders/summary`)
+      ).data,
+  });
+
 export const useGetOrderDetailsQuery = (id: string) =>
   useQuery({
     queryKey: ["orders", id],
@@ -25,6 +39,13 @@ export const usePayOrderMutation = () =>
           details
         )
       ).data,
+  });
+
+export const useGetGoogleApiKeyQuery = () =>
+  useQuery({
+    queryKey: ["google-api-key"],
+    queryFn: async () =>
+      (await apiClient.get<{ key: string }>(`/api/keys/google`)).data,
   });
 
 export const useCreateOrderMutation = () =>
@@ -51,4 +72,27 @@ export const useGetOrderHistoryQuery = () =>
     queryKey: ["order-history"],
     queryFn: async () =>
       (await apiClient.get<Order[]>(`/api/orders/mine`)).data,
+  });
+
+export const useDeliverOrderMutation = () =>
+  useMutation({
+    mutationFn: async (orderId: string) =>
+      (
+        await apiClient.put<{ message: string; order: Order }>(
+          `api/orders/${orderId}/deliver`
+        )
+      ).data,
+  });
+
+export const useDeleteOrderMutation = () =>
+  useMutation({
+    mutationFn: async (orderId: string) =>
+      (await apiClient.delete<{ message: string }>(`api/orders/${orderId}`))
+        .data,
+  });
+
+export const useGetOrdersQuery = () =>
+  useQuery({
+    queryKey: ["orders"],
+    queryFn: async () => (await apiClient.get<[Order]>(`api/orders`)).data,
   });
