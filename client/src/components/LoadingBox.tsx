@@ -19,7 +19,7 @@ const LoadingBox: React.FC = () => {
             renderer: "svg",
             loop: true,
             autoplay: true,
-            animationData: animationData,
+            animationData,
           });
         }
       } catch (error) {
