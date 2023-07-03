@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const { data, isLoading, error } = useGetProductsQuery();
-  console.log("data", data);
   return (
     <div>
       <Helmet>
@@ -23,10 +22,10 @@ export default function HomePage() {
         <LoadingBox />
       ) : error ? (
         <MessageBox variant="danger">{getError(error as ApiError)}</MessageBox>
-      ) : (
+      ) : data ? (
         <>
           <Carousel showThumbs={false} autoPlay>
-            {data!.featuredProducts.map((product) => (
+            {data.featuredProducts.map((product) => (
               <Link
                 key={product._id}
                 to={`/product/${product.slug}`}
@@ -41,11 +40,10 @@ export default function HomePage() {
               </Link>
             ))}
           </Carousel>
-
           <h1>Latest Cars</h1>
           <div className="products">
             <Row>
-              {data!.latestProducts.map((product: Product) => (
+              {data.latestProducts.map((product: Product) => (
                 <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
                   <ProductItem product={product} />
                 </Col>
@@ -53,7 +51,7 @@ export default function HomePage() {
             </Row>
           </div>
         </>
-      )}
+      ) : null}
     </div>
   );
 }
