@@ -10,27 +10,23 @@ type AppState = {
 };
 
 const initialState: AppState = {
-  mode: localStorage.getItem("mode")
-    ? localStorage.getItem("mode")!
-    : window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light",
+  mode:
+    localStorage.getItem("mode") ||
+    (window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light"),
   fullBox: false,
   userInfo: localStorage.getItem("userInfo")
-    ? JSON.parse(localStorage.getItem("userInfo")!)
+    ? JSON.parse(localStorage.getItem("userInfo") || "{}")
     : null,
 
   cart: {
-    cartItems: localStorage.getItem("cartItems")
-      ? JSON.parse(localStorage.getItem("cartItems")!)
-      : [],
-    shippingAddress: localStorage.getItem("shippingAddress")
-      ? JSON.parse(localStorage.getItem("shippingAddress")!)
-      : { location: {} },
-    paymentMethod: localStorage.getItem("paymentMethod")
-      ? localStorage.getItem("paymentMethod")!
-      : "PayPal",
+    cartItems: JSON.parse(localStorage.getItem("cartItems") || "[]"),
+    shippingAddress: JSON.parse(
+      localStorage.getItem("shippingAddress") || "{}"
+    ),
+    paymentMethod: localStorage.getItem("paymentMethod") || "PayPal",
     itemsPrice: 0,
     shippingPrice: 0,
     taxPrice: 0,
@@ -126,16 +122,31 @@ function reducer(state: AppState, action: Action): AppState {
       };
 
     case "SAVE_SHIPPING_ADDRESS_MAP_LOCATION":
-      return {
-        ...state,
-        cart: {
-          ...state.cart,
-          shippingAddress: {
-            ...state.cart.shippingAddress!,
-            location: action.payload,
-          },
-        },
-      };
+      return state.cart.shippingAddress
+        ? {
+            ...state,
+            cart: {
+              ...state.cart,
+              shippingAddress: {
+                ...state.cart.shippingAddress,
+                location: action.payload,
+              },
+            },
+          }
+        : {
+            ...state,
+            cart: {
+              ...state.cart,
+              shippingAddress: {
+                fullName: "",
+                address: "",
+                city: "",
+                postalCode: "",
+                country: "",
+                location: action.payload,
+              },
+            },
+          };
 
     case "SAVE_PAYMENT_METHOD":
       return {
