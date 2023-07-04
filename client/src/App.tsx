@@ -19,7 +19,20 @@ import { getError } from "./utils";
 import { ApiError } from "./types/ApiError";
 import SearchBox from "./components/SearchBox";
 
-function App() {
+export default function App() {
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+
+  const { data: categories, isLoading, error } = useGetCategoriesQuery();
+
+  const signoutHandler = () => {
+    dispatch({ type: "USER_SIGNOUT" });
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("paymentMethod");
+    window.location.href = "/signin";
+  };
+
   const {
     state: { mode, cart, userInfo, fullBox },
     dispatch,
@@ -31,19 +44,6 @@ function App() {
   const switchModeHandler = () => {
     dispatch({ type: "SWITCH_MODE" });
   };
-
-  const signoutHandler = () => {
-    dispatch({ type: "USER_SIGNOUT" });
-    localStorage.removeItem("userInfo");
-    localStorage.removeItem("cartItems");
-    localStorage.removeItem("shippingAddress");
-    localStorage.removeItem("paymentMethod");
-    window.location.href = "/signin";
-  };
-
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-
-  const { data: categories, isLoading, error } = useGetCategoriesQuery();
 
   return (
     <div
@@ -70,7 +70,6 @@ function App() {
               <Navbar.Brand>AlirezaBaba</Navbar.Brand>
             </LinkContainer>
             <SearchBox />
-
             <Navbar.Collapse>
               <Nav className="w-100 justify-content-end">
                 <Link
@@ -171,14 +170,12 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
         </Navbar>
       </header>
-
       {sidebarIsOpen && (
         <div
           onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
           className="side-navbar-backdrop"
         />
       )}
-
       <div
         className={
           sidebarIsOpen
@@ -226,7 +223,6 @@ function App() {
           )}
         </ListGroup>
       </div>
-
       <main>
         <Container fluid>
           <Outlet />
@@ -238,4 +234,3 @@ function App() {
     </div>
   );
 }
-export default App;
