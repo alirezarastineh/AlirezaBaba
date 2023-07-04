@@ -18,7 +18,7 @@ client/src/pages/Orders/OrderPage.tsx
 client/src/pages/Orders/PaymentMethodPage.tsx
 client/src/pages/Orders/PlaceOrderPage.tsx
 client/src/pages/Orders/ShippingAddressPage.tsx
-client/src/pages/Product/Constants.ts
+client/src/pages/Product/constants.ts
 client/src/pages/Product/ProductPage.tsx
 client/src/pages/Product/SearchPage.tsx
 client/src/types/ProtectedRouteProps.ts
