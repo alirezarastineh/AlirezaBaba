@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { Product, Review } from "../types/Product";
 import apiClient from "../apiClient";
 
+// Defining a hook to get all products
 export const useGetProductsQuery = () =>
   useQuery({
     queryKey: ["products"],
@@ -14,6 +15,7 @@ export const useGetProductsQuery = () =>
       ).data,
   });
 
+// Defining a hook to search for products with various filters
 export const useSearchProductsQuery = ({
   page,
   query,
@@ -42,6 +44,8 @@ export const useSearchProductsQuery = ({
         )
       ).data,
   });
+
+// Defining a hook to get the details of a specific product by its slug
 export const useGetProductDetailsBySlugQuery = (slug: string) =>
   useQuery({
     queryKey: ["products", slug],
@@ -49,6 +53,7 @@ export const useGetProductDetailsBySlugQuery = (slug: string) =>
       (await apiClient.get<Product>(`api/products/slug/${slug}`)).data,
   });
 
+// Defining a hook to get the details of a specific product by its ID
 export const useGetProductDetailsQuery = (id: string) =>
   useQuery({
     queryKey: ["products", id],
@@ -56,6 +61,7 @@ export const useGetProductDetailsQuery = (id: string) =>
       (await apiClient.get<Product>(`api/products/${id}`)).data,
   });
 
+// Defining a hook to get all product categories
 export const useGetCategoriesQuery = () =>
   useQuery({
     queryKey: ["categories"],
@@ -63,6 +69,7 @@ export const useGetCategoriesQuery = () =>
       (await apiClient.get<[]>(`/api/products/categories`)).data,
   });
 
+// Defining a mutation hook to create a review for a product
 export const useCreateReviewMutation = () =>
   useMutation({
     mutationFn: async ({
@@ -87,6 +94,7 @@ export const useCreateReviewMutation = () =>
 
 // Admin
 
+// Defining a hook to get all products for an admin
 export const useGetAdminProductsQuery = (page: number) =>
   useQuery({
     queryKey: ["admin-products", page],
@@ -100,6 +108,7 @@ export const useGetAdminProductsQuery = (page: number) =>
       ).data,
   });
 
+// Defining a mutation hook to create a product for an admin
 export const useCreateProductMutation = () =>
   useMutation({
     mutationFn: async () =>
@@ -109,12 +118,15 @@ export const useCreateProductMutation = () =>
         )
       ).data,
   });
+
+// Defining a mutation hook to delete a product for an admin
 export const useDeleteProductMutation = () =>
   useMutation({
     mutationFn: async (productId: string) =>
       (await apiClient.delete(`api/products/${productId}`)).data,
   });
 
+// Defining a mutation hook to update a product for an admin
 export const useUpdateProductMutation = () =>
   useMutation({
     mutationFn: async (product: {
@@ -137,6 +149,7 @@ export const useUpdateProductMutation = () =>
       ).data,
   });
 
+// Defining a mutation hook to upload a product for an admin
 export const useUploadProductMutation = () =>
   useMutation({
     mutationFn: async (formData: FormData) =>

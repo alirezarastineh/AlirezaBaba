@@ -11,6 +11,7 @@ import { getError } from "../utils";
 export default function ProfilePage() {
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
+
   const [name, setName] = useState(userInfo?.name ?? "");
   const [email, setEmail] = useState(userInfo?.email ?? "");
   const [password, setPassword] = useState("");

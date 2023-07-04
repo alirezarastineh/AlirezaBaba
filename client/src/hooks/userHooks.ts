@@ -3,6 +3,7 @@ import apiClient from "../apiClient";
 import { UserInfo } from "../types/Users/UserInfo";
 import { User } from "../types/Users/User";
 
+// Defining a mutation hook to sign in a user
 export const useSigninMutation = () =>
   useMutation({
     mutationFn: async ({
@@ -20,6 +21,7 @@ export const useSigninMutation = () =>
       ).data,
   });
 
+// Defining a mutation hook to sign up a user
 export const useSignupMutation = () =>
   useMutation({
     mutationFn: async ({
@@ -40,6 +42,7 @@ export const useSignupMutation = () =>
       ).data,
   });
 
+// Defining a mutation hook to update a user's profile
 export const useUpdateProfileMutation = () =>
   useMutation({
     mutationFn: async ({
@@ -60,18 +63,21 @@ export const useUpdateProfileMutation = () =>
       ).data,
   });
 
+// Defining a hook to get all users
 export const useGetUsersQuery = () =>
   useQuery({
     queryKey: ["users"],
     queryFn: async () => (await apiClient.get<[User]>(`api/users`)).data,
   });
 
+// Defining a mutation hook to delete a user
 export const useDeleteUserMutation = () =>
   useMutation({
     mutationFn: async (userId: string) =>
       (await apiClient.delete<{ message: string }>(`api/users/${userId}`)).data,
   });
 
+// Defining a mutation hook to update a user
 export const useUpdateUserMutation = () =>
   useMutation({
     mutationFn: async (user: {
@@ -88,6 +94,7 @@ export const useUpdateUserMutation = () =>
       ).data,
   });
 
+// Defining a hook to get the details of a specific user
 export const useGetUserDetailsQuery = (userId: string) =>
   useQuery({
     queryKey: ["users", userId],
