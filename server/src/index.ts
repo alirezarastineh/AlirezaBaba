@@ -1,5 +1,4 @@
 import cors from "cors";
-import path from "path";
 import dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
@@ -41,8 +40,6 @@ app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/keys", keyRouter);
-
-app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({ message: err.message });
