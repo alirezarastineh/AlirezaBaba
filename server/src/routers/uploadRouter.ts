@@ -24,10 +24,13 @@ uploadRouter.post(
     const streamUpload = (req: Request) => {
       return new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
-          (error: Error, result: Response) => {
+          {
+            folder: "uploads", // specify the folder name here
+          },
+          (error, result: any) => {
             if (result) {
               resolve(result);
-            } else {
+            } else if (error) {
               reject(error);
             }
           }
