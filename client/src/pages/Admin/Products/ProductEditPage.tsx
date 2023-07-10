@@ -101,12 +101,12 @@ export default function ProductEditPage() {
       bodyFormData.append("image", file);
     }
     try {
-      const data = await uploadProduct(bodyFormData);
+      const { secure_url } = await uploadProduct(bodyFormData);
 
       if (forImages) {
-        setImages([...images, data.secure_url]);
+        setImages([...images, secure_url]);
       } else {
-        setImage(data.secure_url);
+        setImage(secure_url);
       }
       toast.success("Image uploaded successfully. click Update to apply it");
     } catch (err) {
@@ -167,7 +167,7 @@ export default function ProductEditPage() {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="imageFile">
-            <Form.Label>Upload Image</Form.Label>
+            <Form.Label>Upload Image (max. 10 MB) </Form.Label>
             <input type="file" onChange={uploadFileHandler} />
             {loadingUpload && <LoadingBox />}
           </Form.Group>
