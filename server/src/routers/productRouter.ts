@@ -156,7 +156,8 @@ productRouter.post(
   asyncHandler(async (req: Request, res: Response) => {
     const product = await ProductModel.create({
       name: `sample name ${Date.now()}`,
-      image: "../assets/images/p1.jpg",
+      image:
+        "https://res.cloudinary.com/kouroshrstn/image/upload/v1688980296/uploads/p1.jpg",
       price: 0,
       slug: `sample-slug-${Date.now()}`,
       category: "sample category",
