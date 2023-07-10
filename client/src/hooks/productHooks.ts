@@ -155,7 +155,7 @@ export const useUploadProductMutation = () =>
     mutationFn: async (formData: FormData) =>
       (
         await apiClient.post<{ secure_url: string }>(
-          `api/uploads/local`,
+          `api/uploads/cloudinary`,
           formData,
           {
             headers: {
