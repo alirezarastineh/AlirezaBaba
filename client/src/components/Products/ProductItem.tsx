@@ -39,7 +39,7 @@ function ProductItem({ product }: { product: Product }) {
       {/* Link to the product details page */}
       <Link to={`/product/${product.slug}`}>
         <img
-          src={`http://localhost:4000${product.image}`}
+          src={product.image}
           className="card-img-top product-image"
           alt={product.name}
         />
