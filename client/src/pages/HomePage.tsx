@@ -25,7 +25,7 @@ export default function HomePage() {
         <MessageBox variant="danger">{getError(error as ApiError)}</MessageBox>
       ) : data ? (
         <>
-          <Carousel showThumbs={false} autoPlay>
+          <Carousel showThumbs={false} autoPlay infiniteLoop>
             {data.featuredProducts.map((product) => (
               <Link
                 key={product._id}
@@ -33,10 +33,7 @@ export default function HomePage() {
                 className="flex"
               >
                 <div>
-                  <img
-                    src={`http://localhost:4000${product.banner}`}
-                    alt={product.name}
-                  />
+                  <img src={product.banner} alt={product.name} />
                 </div>
               </Link>
             ))}
