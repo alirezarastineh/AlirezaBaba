@@ -5,7 +5,7 @@ import { isAdmin, isAuth } from "../utils";
 
 export const productRouter = express.Router();
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 20;
 
 // /api/products
 productRouter.get(
@@ -122,7 +122,7 @@ productRouter.get(
   })
 );
 
-// /api/slug/shirt
+// /api/slug/car
 productRouter.get(
   "/slug/:slug",
   asyncHandler(async (req: Request, res: Response) => {
@@ -176,6 +176,39 @@ productRouter.post(
   })
 );
 
+productRouter.post(
+  "/:id/reviews",
+  isAuth,
+  asyncHandler(async (req: Request, res: Response) => {
+    const productId = req.params.id;
+    const product = await ProductModel.findById(productId);
+    if (product) {
+      if (product.reviews.find((x) => x.name === req.user.name)) {
+        res.status(400).json({ message: "You already submitted a review" });
+        return;
+      }
+      const review = {
+        name: req.user.name,
+        rating: Number(req.body.rating),
+        comment: req.body.comment,
+        createdAt: new Date(),
+      };
+      product.reviews.push(review);
+      product.numReviews = product.reviews.length;
+      product.rating =
+        product.reviews.reduce((a, c) => c.rating + a, 0) /
+        product.reviews.length;
+      const updatedProduct = await product.save();
+      res.status(201).json({
+        message: "Review Created",
+        review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
+      });
+      return;
+    }
+    res.status(404).json({ message: "Product Not Found" });
+  })
+);
+
 productRouter.put(
   "/:id",
   isAuth,
@@ -212,38 +245,5 @@ productRouter.delete(
     } else {
       res.status(404).json({ message: "Product Not Found" });
     }
-  })
-);
-
-productRouter.post(
-  "/:id/reviews",
-  isAuth,
-  asyncHandler(async (req: Request, res: Response) => {
-    const productId = req.params.id;
-    const product = await ProductModel.findById(productId);
-    if (product) {
-      if (product.reviews.find((x) => x.name === req.user.name)) {
-        res.status(400).json({ message: "You already submitted a review" });
-        return;
-      }
-      const review = {
-        name: req.user.name,
-        rating: Number(req.body.rating),
-        comment: req.body.comment,
-        createdAt: new Date(),
-      };
-      product.reviews.push(review);
-      product.numReviews = product.reviews.length;
-      product.rating =
-        product.reviews.reduce((a, c) => c.rating + a, 0) /
-        product.reviews.length;
-      const updatedProduct = await product.save();
-      res.status(201).json({
-        message: "Review Created",
-        review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
-      });
-      return;
-    }
-    res.status(404).json({ message: "Product Not Found" });
   })
 );
