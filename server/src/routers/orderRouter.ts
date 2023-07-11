@@ -70,31 +70,6 @@ orderRouter.get(
   })
 );
 
-orderRouter.post(
-  "/",
-  isAuth,
-  asyncHandler(async (req: Request, res: Response) => {
-    if (req.body.orderItems.length === 0) {
-      res.status(400).json({ message: "Cart is empty" });
-    } else {
-      const createdOrder = await OrderModel.create({
-        orderItems: req.body.orderItems.map((x: Product) => ({
-          ...x,
-          product: x._id,
-        })),
-        shippingAddress: req.body.shippingAddress,
-        paymentMethod: req.body.paymentMethod,
-        itemsPrice: req.body.itemsPrice,
-        shippingPrice: req.body.shippingPrice,
-        taxPrice: req.body.taxPrice,
-        totalPrice: req.body.totalPrice,
-        user: req.user._id,
-      } as Order);
-      res.status(201).json({ message: "Order Created", order: createdOrder });
-    }
-  })
-);
-
 orderRouter.get(
   // /api/orders/:id
   "/:id",
@@ -133,21 +108,6 @@ orderRouter.put(
   })
 );
 
-orderRouter.delete(
-  "/:id",
-  isAuth,
-  isAdmin,
-  asyncHandler(async (req: Request, res: Response) => {
-    const order = await OrderModel.findById(req.params.id);
-    if (order) {
-      const deleteOrder = await order.deleteOne();
-      res.json({ message: "Order Deleted", order: deleteOrder });
-    } else {
-      res.status(404).json({ message: "Order Not Found" });
-    }
-  })
-);
-
 orderRouter.put(
   "/:id/deliver",
   isAuth,
@@ -163,5 +123,45 @@ orderRouter.put(
       return;
     }
     res.status(404).json({ message: "Order Not Found" });
+  })
+);
+
+orderRouter.post(
+  "/",
+  isAuth,
+  asyncHandler(async (req: Request, res: Response) => {
+    if (req.body.orderItems.length === 0) {
+      res.status(400).json({ message: "Cart is empty" });
+    } else {
+      const createdOrder = await OrderModel.create({
+        orderItems: req.body.orderItems.map((x: Product) => ({
+          ...x,
+          product: x._id,
+        })),
+        shippingAddress: req.body.shippingAddress,
+        paymentMethod: req.body.paymentMethod,
+        itemsPrice: req.body.itemsPrice,
+        shippingPrice: req.body.shippingPrice,
+        taxPrice: req.body.taxPrice,
+        totalPrice: req.body.totalPrice,
+        user: req.user._id,
+      } as Order);
+      res.status(201).json({ message: "Order Created", order: createdOrder });
+    }
+  })
+);
+
+orderRouter.delete(
+  "/:id",
+  isAuth,
+  isAdmin,
+  asyncHandler(async (req: Request, res: Response) => {
+    const order = await OrderModel.findById(req.params.id);
+    if (order) {
+      const deleteOrder = await order.deleteOne();
+      res.json({ message: "Order Deleted", order: deleteOrder });
+    } else {
+      res.status(404).json({ message: "Order Not Found" });
+    }
   })
 );
