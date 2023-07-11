@@ -1,5 +1,9 @@
 import multer from "multer";
-import { v2 as cloudinary } from "cloudinary";
+import {
+  v2 as cloudinary,
+  UploadApiErrorResponse,
+  UploadApiResponse,
+} from "cloudinary";
 import streamifier from "streamifier";
 import express, { Request, Response } from "express";
 import { isAdmin, isAuth } from "../utils";
@@ -22,12 +26,15 @@ uploadRouter.post(
     });
 
     const streamUpload = (req: Request) => {
-      return new Promise((resolve, reject) => {
+      return new Promise<UploadApiResponse>((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
           {
             folder: "uploads", // specify the folder name here
           },
-          (error, result: any) => {
+          (
+            error: UploadApiErrorResponse | undefined,
+            result: UploadApiResponse | undefined
+          ) => {
             if (result) {
               resolve(result);
             } else if (error) {
