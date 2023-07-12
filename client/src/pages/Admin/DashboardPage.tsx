@@ -43,7 +43,7 @@ export default function DashboardPage() {
               <Card>
                 <Card.Body>
                   <Card.Title>
-                    $
+                    €
                     {summary.orders && summary.users[0]
                       ? summary.orders[0].totalSales.toFixed(2)
                       : 0}
