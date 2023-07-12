@@ -33,6 +33,10 @@ export default function App() {
     window.location.href = "/signin";
   };
 
+  const switchModeHandler = () => {
+    dispatch({ type: "SWITCH_MODE" });
+  };
+
   const {
     state: { mode, cart, userInfo, fullBox },
     dispatch,
@@ -41,9 +45,6 @@ export default function App() {
   useEffect(() => {
     document.body.setAttribute("data-bs-theme", mode);
   }, [mode]);
-  const switchModeHandler = () => {
-    dispatch({ type: "SWITCH_MODE" });
-  };
 
   return (
     <div
