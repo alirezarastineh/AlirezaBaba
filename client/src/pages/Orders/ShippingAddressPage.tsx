@@ -15,12 +15,6 @@ export default function ShippingAddressPage() {
     cart: { shippingAddress },
   } = state;
 
-  useEffect(() => {
-    if (!userInfo) {
-      navigate("/signin?redirect=/shipping");
-    }
-  }, [userInfo, navigate]);
-
   const [fullName, setFullName] = useState(shippingAddress.fullName || "");
   const [address, setAddress] = useState(shippingAddress.address || "");
   const [city, setCity] = useState(shippingAddress.city || "");
@@ -28,6 +22,12 @@ export default function ShippingAddressPage() {
     shippingAddress.postalCode || ""
   );
   const [country, setCountry] = useState(shippingAddress.country || "");
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("/signin?redirect=/shipping");
+    }
+  }, [userInfo, navigate]);
 
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
