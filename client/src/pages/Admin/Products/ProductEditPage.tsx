@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Container, ListGroup, Button } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
+import { Container, ListGroup, Button, Form } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { getError } from "../../../utils";
 import LoadingBox from "../../../components/LoadingBox";
