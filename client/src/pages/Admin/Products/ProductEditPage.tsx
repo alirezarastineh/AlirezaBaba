@@ -1,4 +1,3 @@
-// Importing necessary hooks and components from React, react-router-dom, react-toastify, react-bootstrap, react-helmet-async, and local files
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -17,9 +16,7 @@ import {
   useUploadProductMutation,
 } from "../../../hooks/productHooks";
 
-// Defining a component for the product edit page
 export default function ProductEditPage() {
-  // Using hooks to get the navigate function, the product ID from the URL parameters, and to manage state for the product details form fields
   const navigate = useNavigate();
   const params = useParams();
   const { id: productId } = params;
@@ -34,14 +31,12 @@ export default function ProductEditPage() {
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
 
-  // Using the useGetProductDetailsQuery hook to fetch the details of the product
   const {
     data: product,
     isLoading,
     error,
   } = useGetProductDetailsQuery(productId || "");
 
-  // Using the useEffect hook to set the form fields to the current product details when the product data changes
   useEffect(() => {
     if (!product) {
       return;
@@ -57,11 +52,9 @@ export default function ProductEditPage() {
     setDescription(product.description);
   }, [product]);
 
-  // Using the useUpdateProductMutation hook to get the function to update the product
   const { mutateAsync: updateProduct, isLoading: loadingUpdate } =
     useUpdateProductMutation();
 
-  // Defining the submit handler for the form, which updates the product and navigates back to the admin products page
   const submitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
@@ -86,11 +79,9 @@ export default function ProductEditPage() {
     }
   };
 
-  // Using the useUploadProductMutation hook to get the function to upload a product image
   const { mutateAsync: uploadProduct, isLoading: loadingUpload } =
     useUploadProductMutation();
 
-  // Defining the handler for the file input change event, which uploads the selected file and sets the image or images state
   const uploadFileHandler = async (
     e: React.FormEvent<HTMLInputElement>,
     forImages = false
@@ -114,13 +105,11 @@ export default function ProductEditPage() {
     }
   };
 
-  // Defining the handler for the delete button click event, which removes the selected image from the images state
   const deleteFileHandler = async (fileName: string) => {
     setImages(images.filter((x) => x !== fileName));
     toast.success("Image removed successfully. click Update to apply it");
   };
 
-  // Returning the JSX to render
   return (
     <Container className="small-container">
       <Helmet>
