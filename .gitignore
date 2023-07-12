@@ -1,7 +1,2 @@
 node_modules/
 client/.env
-client/src/components/AdminRoute.tsx
-client/src/pages/Admin/OrderListPage.tsx
-client/src/pages/Admin/Users/UserEditPage.tsx
-client/src/pages/Admin/Users/UserListPage.tsx
-client/src/pages/Product/SearchPage.tsx
