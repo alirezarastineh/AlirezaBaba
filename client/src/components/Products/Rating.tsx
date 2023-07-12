@@ -6,7 +6,6 @@ function Rating(props: {
   const { rating, numReviews, caption } = props;
   return (
     <div className="rating">
-      {/* Display the appropriate number of stars based on the rating */}
       <span>
         <i
           className={
