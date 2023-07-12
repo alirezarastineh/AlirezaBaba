@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import Button from "react-bootstrap/Button";
+import { Button } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import LoadingBox from "../../components/LoadingBox";

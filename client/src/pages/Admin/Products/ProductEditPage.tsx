@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getError } from "../../../utils";
-import Container from "react-bootstrap/Container";
-import ListGroup from "react-bootstrap/ListGroup";
+import { Container, ListGroup, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { Helmet } from "react-helmet-async";
+import { getError } from "../../../utils";
 import LoadingBox from "../../../components/LoadingBox";
 import MessageBox from "../../../components/MessageBox";
-import Button from "react-bootstrap/Button";
 import { ApiError } from "../../../types/ApiError";
 import {
   useGetProductDetailsQuery,

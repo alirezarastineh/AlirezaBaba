@@ -1,14 +1,6 @@
 import React, { useContext, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import {
-  useCreateReviewMutation,
-  useGetProductDetailsBySlugQuery,
-} from "../../hooks/productHooks";
-import LoadingBox from "../../components/LoadingBox";
-import MessageBox from "../../components/MessageBox";
-import { convertProductToCartItem, getError } from "../../utils";
-import { ApiError } from "../../types/ApiError";
 import { toast } from "react-toastify";
 import {
   Badge,
@@ -20,6 +12,14 @@ import {
   Form,
   FloatingLabel,
 } from "react-bootstrap";
+import {
+  useCreateReviewMutation,
+  useGetProductDetailsBySlugQuery,
+} from "../../hooks/productHooks";
+import LoadingBox from "../../components/LoadingBox";
+import MessageBox from "../../components/MessageBox";
+import { convertProductToCartItem, getError } from "../../utils";
+import { ApiError } from "../../types/ApiError";
 import Rating from "../../components/Products/Rating";
 import { Store } from "../../Store";
 import { Review } from "../../types/Product";

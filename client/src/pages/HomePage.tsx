@@ -1,15 +1,15 @@
 import { Row, Col } from "react-bootstrap";
-import LoadingBox from "../components/LoadingBox";
-import MessageBox from "../components/MessageBox";
-import ProductItem from "../components/Products/ProductItem";
 import { Helmet } from "react-helmet-async";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Link } from "react-router-dom";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+import ProductItem from "../components/Products/ProductItem";
 import { useGetProductsQuery } from "../hooks/productHooks";
 import { ApiError } from "../types/ApiError";
 import { getError } from "../utils";
 import { Product } from "../types/Product";
-import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const { data, isLoading, error } = useGetProductsQuery();

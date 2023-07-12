@@ -1,7 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import { Col, Button, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import LoadingBox from "../../../components/LoadingBox";
 import MessageBox from "../../../components/MessageBox";

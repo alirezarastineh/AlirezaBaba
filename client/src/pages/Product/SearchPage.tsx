@@ -1,15 +1,13 @@
 import { useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { getError } from "../../utils";
 import { Helmet } from "react-helmet-async";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Row, Col, Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { getError } from "../../utils";
 import Rating from "../../components/Products/Rating";
 import LoadingBox from "../../components/LoadingBox";
 import MessageBox from "../../components/MessageBox";
-import Button from "react-bootstrap/Button";
 import ProductItem from "../../components/Products/ProductItem";
-import { LinkContainer } from "react-router-bootstrap";
 import { ApiError } from "../../types/ApiError";
 import {
   useGetCategoriesQuery,
