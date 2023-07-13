@@ -104,9 +104,9 @@ export default function CartPage() {
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <h3>
-                    Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}
+                    Subtotal ({cartItems.reduce((a, b) => a + b.quantity, 0)}
                     items) : €
-                    {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+                    {cartItems.reduce((a, b) => a + b.price * b.quantity, 0)}
                   </h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
