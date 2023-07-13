@@ -90,7 +90,6 @@ export default function ProductPage() {
       payload: { ...convertProductToCartItem(product), quantity },
     });
     toast.success("Product added to the cart");
-    navigate("/cart");
   };
 
   const params = useParams();
