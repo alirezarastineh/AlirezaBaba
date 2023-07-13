@@ -123,7 +123,7 @@ export default function OrderPage() {
           type: "resetOptions",
           value: {
             clientId: data.clientId,
-            currency: "USD",
+            currency: "EUR",
           },
         });
         paypalDispatch({
