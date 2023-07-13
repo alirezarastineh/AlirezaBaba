@@ -29,7 +29,7 @@ uploadRouter.post(
       return new Promise<UploadApiResponse>((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
           {
-            folder: "uploads", // specify the folder name here
+            folder: "uploads",
           },
           (
             error: UploadApiErrorResponse | undefined,
