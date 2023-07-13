@@ -230,7 +230,9 @@ export default function App() {
         </Container>
       </main>
       <footer>
-        <div className="text-center">All rights reserved</div>
+        <div className="text-center">
+          Powered by <span className="text-bold">Alireza Rastineh</span>
+        </div>
       </footer>
     </div>
   );
