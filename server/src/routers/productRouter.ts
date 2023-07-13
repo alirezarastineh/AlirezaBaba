@@ -66,6 +66,7 @@ productRouter.get(
       ...priceFilter,
       ...ratingFilter,
     });
+
     const products = await ProductModel.find({
       ...queryFilter,
       ...categoryFilter,
