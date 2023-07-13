@@ -66,6 +66,7 @@ const uploadLocal = multer({ storage });
 uploadRouter.post(
   "/local",
   isAuth,
+  isAdmin,
   uploadLocal.single("image"),
   (req: Request, res: Response) => {
     if (!req.file) throw Error("req.file is null");
