@@ -189,10 +189,10 @@ export default function SearchPage() {
                   <div>
                     {data?.countProducts === 0 ? "No" : data?.countProducts}{" "}
                     Results
-                    {query !== "all" && " : " + query}
-                    {category !== "all" && " : " + category}
-                    {price !== "all" && " : Price " + price}
-                    {rating !== "all" && " : Rating " + rating + " & up"}
+                    {query !== "all" && ` : ${query}`}
+                    {category !== "all" && ` : ${category}`}
+                    {price !== "all" && ` : Price ${price}`}
+                    {rating !== "all" && ` : Rating ${rating} & up`}
                     {query !== "all" ||
                     category !== "all" ||
                     rating !== "all" ||
