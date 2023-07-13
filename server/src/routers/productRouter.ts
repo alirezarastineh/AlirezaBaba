@@ -45,6 +45,7 @@ productRouter.get(
         : {};
 
     const categoryFilter = category && category !== "all" ? { category } : {};
+
     const priceFilter =
       price && price !== "all"
         ? {
