@@ -36,10 +36,15 @@ export default function ProductPage() {
 
   const submitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    if (!comment || !rating) {
-      toast.error("Please enter comment and rating");
+    if (!comment) {
+      toast.error("Please enter a comment");
       return;
     }
+    if (!rating) {
+      toast.error("Please select a rating");
+      return;
+    }
+
     if (!product || !userInfo || !reviewsRef.current) {
       toast.error("An error occurred. Please try again later.");
       return;
