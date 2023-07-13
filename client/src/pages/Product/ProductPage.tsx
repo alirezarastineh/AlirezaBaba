@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   Badge,
@@ -68,8 +68,6 @@ export default function ProductPage() {
       toast.error(getError(err as ApiError));
     }
   };
-
-  const navigate = useNavigate();
 
   const { state, dispatch } = useContext(Store);
   const { cart, userInfo } = state;
