@@ -18,7 +18,7 @@ export default function PlaceOrderPage() {
 
   const round2 = (num: number) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.2345 => 123.23
   cart.itemsPrice = round2(
-    cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
+    cart.cartItems.reduce((a, b) => a + b.quantity * b.price, 0)
   );
   cart.shippingPrice = cart.itemsPrice > 100 ? round2(0) : round2(10);
   cart.taxPrice = round2(0.15 * cart.itemsPrice);
