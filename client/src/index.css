@@ -32,7 +32,7 @@ main {
 }
 
 .rating span {
-  color: #ffc000
+  color: #ffc000;
 }
 
 .product-info {
@@ -57,12 +57,12 @@ img.thumbnail {
   max-width: 600px;
 }
 
-.checkout-steps>div {
+.checkout-steps > div {
   border-bottom: 0.2rem solid #a0a0a0;
   color: #a0a0a0;
 }
 
-.checkout-steps>div.active {
+.checkout-steps > div.active {
   border-bottom: 0.2rem solid #f08000;
   color: #f08000;
 }
@@ -89,7 +89,7 @@ img.thumbnail {
 }
 
 a.header-link,
-.header-link>a {
+.header-link > a {
   border: 1px rgb(33, 37, 41) solid;
   border-radius: 2px;
   color: white !important;
@@ -97,7 +97,7 @@ a.header-link,
 }
 
 a.header-link:hover,
-.header-link>a:hover {
+.header-link > a:hover {
   color: white;
   border: 1px white solid;
 }
