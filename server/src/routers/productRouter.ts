@@ -32,7 +32,6 @@ productRouter.get(
     const category = (req.query.category || "") as string;
     const order = (req.query.order || "") as string;
     const price = (req.query.price || "") as string;
-
     const rating = req.query.rating || "";
 
     const queryFilter =
