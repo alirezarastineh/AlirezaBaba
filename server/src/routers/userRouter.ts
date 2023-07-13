@@ -30,17 +30,27 @@ userRouter.post(
   "/signin",
   asyncHandler(async (req: Request, res: Response) => {
     const user = await UserModel.findOne({ email: req.body.email });
-    if (user && bcrypt.compareSync(req.body.password, user.password)) {
-      res.json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-        token: generateToken(user),
-      });
+    if (!user) {
+      res.status(401).json({ message: "Invalid email" });
       return;
     }
-    res.status(401).json({ message: "Invalid email or password" });
+
+    const isPasswordCorrect = bcrypt.compareSync(
+      req.body.password,
+      user.password
+    );
+    if (!isPasswordCorrect) {
+      res.status(401).json({ message: "Invalid password" });
+      return;
+    }
+
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user),
+    });
   })
 );
 
