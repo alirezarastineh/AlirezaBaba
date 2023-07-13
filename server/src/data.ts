@@ -63,7 +63,7 @@ export const sampleProducts: Product[] = [
     name: "Dodge Challenger SRT Hellcat",
     slug: "dodge-challenger-srt-hellcat",
     image:
-      "https://res.cloudinary.com/kouroshrstn/image/upload/v1688980296/uploads/p1.jpg",
+      "https://res.cloudinary.com/kouroshrstn/image/upload/v1689244644/uploads/SampleCar.jpg",
     category: "Car",
     brand: "Dodge",
     price: 92000.0,

@@ -158,7 +158,7 @@ productRouter.post(
     const product = await ProductModel.create({
       name: `sample name ${Date.now()}`,
       image:
-        "https://res.cloudinary.com/kouroshrstn/image/upload/v1688980296/uploads/p1.jpg",
+        "https://res.cloudinary.com/kouroshrstn/image/upload/v1689244644/uploads/SampleCar.jpg",
       price: 0,
       slug: `sample-slug-${Date.now()}`,
       category: "sample category",
