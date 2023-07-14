@@ -98,7 +98,7 @@ export default function SearchPage() {
         <Col md={3}>
           <h3>Department</h3>
           <div>
-            <ul>
+            <ul className="no-bullets">
               <li>
                 <Link
                   className={"all" === category ? "text-bold" : ""}
@@ -130,7 +130,7 @@ export default function SearchPage() {
           </div>
           <div>
             <h3>Price</h3>
-            <ul>
+            <ul className="no-bullets">
               <li>
                 <Link
                   className={"all" === price ? "text-bold" : ""}
@@ -153,7 +153,7 @@ export default function SearchPage() {
           </div>
           <div>
             <h3>Avg. Customer Review</h3>
-            <ul>
+            <ul className="no-bullets">
               {ratings.map((r) => (
                 <li key={r.name}>
                   <Link

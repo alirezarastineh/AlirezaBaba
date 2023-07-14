@@ -208,3 +208,7 @@ button.side-navbar-user:hover {
 button.thumbnail {
   padding: 0;
 }
+
+ul.no-bullets {
+  list-style-type: none;
+}
