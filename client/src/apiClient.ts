@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apiClient = axios.create({
   baseURL:
-    process.env.NODE_ENV === "development"
+    import.meta.env.MODE === "development"
       ? "http://localhost:4000/"
       : "https://alireza-baba-server.vercel.app/",
   headers: {
