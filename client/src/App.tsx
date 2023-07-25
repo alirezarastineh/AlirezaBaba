@@ -30,6 +30,11 @@ export default function App() {
     localStorage.removeItem("cartItems");
     localStorage.removeItem("shippingAddress");
     localStorage.removeItem("paymentMethod");
+    console.log(
+      "removed from local storage",
+      localStorage.removeItem("cartItems")
+    );
+
     window.location.href = "signin";
   };
 
