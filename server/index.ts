@@ -24,12 +24,12 @@ mongoose
   });
 
 const app = express();
-app.use(
-  cors({
-    credentials: true,
-    origin: ["http://localhost:5173"],
-  })
-);
+const corsOptions = {
+  credentials: true,
+  origin: ["http://localhost:5173", "https://alireza-baba.vercel.app"],
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
