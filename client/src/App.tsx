@@ -7,7 +7,7 @@ import {
   Navbar,
   NavDropdown,
 } from "react-bootstrap";
-import { useNavigate, Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,8 +20,6 @@ import { ApiError } from "./types/ApiError";
 import SearchBox from "./components/SearchBox";
 
 export default function App() {
-  const navigate = useNavigate();
-
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
 
   const { data: categories, isLoading, error } = useGetCategoriesQuery();
@@ -32,7 +30,7 @@ export default function App() {
     localStorage.removeItem("cartItems");
     localStorage.removeItem("shippingAddress");
     localStorage.removeItem("paymentMethod");
-    navigate("/signin");
+    window.location.href = "/signin";
   };
 
   const switchModeHandler = () => {
