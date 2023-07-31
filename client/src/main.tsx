@@ -39,12 +39,12 @@ import MapPage from "./pages/Orders/MapPage";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index={true} path="/" element={<HomePage />} />
-      <Route path="/product/:slug" element={<ProductPage />} />
-      <Route path="/cart" element={<CartPage />} />
-      <Route path="/search" element={<SearchPage />} />
-      <Route path="/signin" element={<SigninPage />} />
-      <Route path="/signup" element={<SignupPage />} />
+      <Route index={true} element={<HomePage />} />
+      <Route path="product/:slug" element={<ProductPage />} />
+      <Route path="cart" element={<CartPage />} />
+      <Route path="search" element={<SearchPage />} />
+      <Route path="signin" element={<SigninPage />} />
+      <Route path="signup" element={<SignupPage />} />
       {/* Normal Users */}
       <Route path="" element={<ProtectedRoute />}>
         <Route path="/orderhistory" element={<OrderHistoryPage />} />
