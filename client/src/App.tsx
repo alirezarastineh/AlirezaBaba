@@ -97,7 +97,7 @@ export default function App() {
                     <NavDropdown.Divider />
                     <Link
                       className="dropdown-item"
-                      to="#signout"
+                      to="/signout"
                       onClick={signoutHandler}
                     >
                       Sign Out
